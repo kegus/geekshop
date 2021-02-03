@@ -30,10 +30,7 @@ def register(request):
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         form = UserRegisterForm()
-    context = {
-        'form': form,
-        'basket': Basket.objects.all(),
-    }
+    context = {'form': form}
     return render(request, 'authapp/register.html', context)
 
 
@@ -50,6 +47,8 @@ def profile(request):
             return HttpResponseRedirect(reverse('auth:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    context = {'form': form}
+    context = {
+        'form': form,
+        'baskets': Basket.objects.filter(user=request.user),
+    }
     return render(request, 'authapp/profile.html', context)
-
