@@ -5,7 +5,7 @@ from authapp.models import User
 
 
 class UserAdminRegisterForm(UserRegisterForm):
-    avatar = forms.ImageField(widget=forms.FileInput())
+    avatar = forms.ImageField(widget=forms.FileInput(), required=False)
 
     class Meta:
         model = User
